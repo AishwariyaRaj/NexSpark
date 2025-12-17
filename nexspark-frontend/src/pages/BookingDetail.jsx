@@ -149,7 +149,7 @@ const BookingDetail = () => {
       });
 
       console.log('Booking created successfully:', booking);
-      toast.success('Booking created successfully!', {
+      toast.success('Rental booking created successfully! Proceed to payment.', {
         duration: 3000,
       });
       // Use the correct property name from backend response
@@ -186,8 +186,8 @@ const BookingDetail = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
-          <p className="mt-4 text-secondary-600">Loading vehicle details...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading vehicle details...</p>
         </div>
       </div>
     );
@@ -198,11 +198,11 @@ const BookingDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-secondary-100 py-8">
+    <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4 max-w-4xl">
         <button
           onClick={() => navigate('/search')}
-          className="mb-4 text-primary-600 hover:text-primary-700 flex items-center"
+          className="mb-4 text-orange-600 hover:text-orange-700 flex items-center"
         >
           <svg
             className="w-5 h-5 mr-1"
@@ -222,13 +222,13 @@ const BookingDetail = () => {
 
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
           {/* Vehicle Header */}
-          <div className="p-6 border-b border-secondary-200">
+          <div className="p-6 border-b border-gray-200">
             <div className="flex justify-between items-start">
               <div>
-                <h1 className="text-3xl font-bold text-secondary-800">
+                <h1 className="text-3xl font-bold text-gray-800">
                   {vehicle.make} {vehicle.model}
                 </h1>
-                <p className="text-secondary-600 mt-1">{vehicle.type} • {vehicle.year}</p>
+                <p className="text-gray-600 mt-1">{vehicle.type} • {vehicle.year}</p>
               </div>
               <span className="px-3 py-1 rounded-full text-sm font-semibold bg-success-100 text-success-800">
                 AVAILABLE
@@ -237,7 +237,7 @@ const BookingDetail = () => {
           </div>
 
           {/* Vehicle Image */}
-          <div className="p-6 border-b border-secondary-200">
+          <div className="p-6 border-b border-gray-200">
             {getVehicleImage(vehicle.make, vehicle.model, vehicle.imageUrl) ? (
               <img
                 src={getVehicleImage(vehicle.make, vehicle.model, vehicle.imageUrl)}
@@ -249,7 +249,7 @@ const BookingDetail = () => {
                 }}
               />
             ) : null}
-            <div className="fallback-image w-full h-64 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg shadow-md flex items-center justify-center" style={{display: getVehicleImage(vehicle.make, vehicle.model, vehicle.imageUrl) ? 'none' : 'flex'}}>
+            <div className="fallback-image w-full h-64 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg shadow-md flex items-center justify-center" style={{display: getVehicleImage(vehicle.make, vehicle.model, vehicle.imageUrl) ? 'none' : 'flex'}}>
               <div className="text-center text-white">
                 <svg className="w-20 h-20 mx-auto mb-2 opacity-80" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M18.92 5.01C18.72 4.42 18.16 4 17.5 4h-11c-.66 0-1.21.42-1.42 1.01L3 11v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 15c-.83 0-1.5-.67-1.5-1.5S5.67 12 6.5 12s1.5.67 1.5 1.5S7.33 15 6.5 15zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 10l1.5-4.5h11L19 10H5z"/>
@@ -261,17 +261,17 @@ const BookingDetail = () => {
           </div>
 
           {/* Vehicle Details */}
-          <div className="p-6 border-b border-secondary-200">
+          <div className="p-6 border-b border-gray-200">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-secondary-600 text-sm">Location</p>
-                <p className="text-secondary-800 font-medium">
+                <p className="text-gray-600 text-sm">Location</p>
+                <p className="text-gray-800 font-medium">
                   {vehicle.location}
                 </p>
               </div>
               <div>
-                <p className="text-secondary-600 text-sm">Daily Rate</p>
-                <p className="text-primary-600 font-bold text-xl">
+                <p className="text-gray-600 text-sm">Daily Rate</p>
+                <p className="text-orange-600 font-bold text-xl">
                   {formatCurrency(vehicle.dailyRate)}
                 </p>
               </div>
@@ -281,9 +281,12 @@ const BookingDetail = () => {
           {/* Booking Form */}
           {
             <form onSubmit={handleSubmit} className="p-6">
-              <h2 className="text-2xl font-bold text-secondary-800 mb-4">
-                Book This Vehicle
+              <h2 className="text-2xl font-bold text-secondary-800 mb-2">
+                Rent This Vehicle
               </h2>
+              <p className="text-secondary-600 mb-6">
+                Select your rental dates and complete the booking to rent this vehicle
+              </p>
 
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div>
@@ -330,22 +333,22 @@ const BookingDetail = () => {
 
               {/* Cost Summary */}
               {days > 0 && (
-                <div className="bg-secondary-50 rounded-lg p-4 mb-6">
-                  <h3 className="font-bold text-secondary-800 mb-2">
-                    Booking Summary
+                <div className="bg-orange-50 rounded-lg p-4 mb-6 border-2 border-orange-200">
+                  <h3 className="font-bold text-gray-800 mb-3 text-lg">
+                    Rental Summary
                   </h3>
-                  <div className="space-y-1">
-                    <div className="flex justify-between text-secondary-700">
-                      <span>Daily Rate:</span>
-                      <span>{formatCurrency(vehicle.dailyRate)}</span>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-gray-700">
+                      <span>Daily Rental Rate:</span>
+                      <span className="font-semibold">{formatCurrency(vehicle.dailyRate)}</span>
                     </div>
-                    <div className="flex justify-between text-secondary-700">
-                      <span>Duration:</span>
-                      <span>{days} day(s)</span>
+                    <div className="flex justify-between text-gray-700">
+                      <span>Rental Duration:</span>
+                      <span className="font-semibold">{days} day(s)</span>
                     </div>
-                    <div className="border-t border-secondary-300 pt-2 mt-2">
-                      <div className="flex justify-between text-lg font-bold text-primary-600">
-                        <span>Total Cost:</span>
+                    <div className="border-t-2 border-orange-300 pt-2 mt-2">
+                      <div className="flex justify-between text-lg font-bold text-orange-600">
+                        <span>Total Rental Cost:</span>
                         <span>{formatCurrency(totalCost)}</span>
                       </div>
                     </div>
@@ -356,7 +359,7 @@ const BookingDetail = () => {
               <button
                 type="submit"
                 disabled={submitting || days <= 0}
-                className="w-full bg-primary-600 hover:bg-primary-700 disabled:bg-secondary-400 disabled:cursor-not-allowed text-white font-medium py-3 px-4 rounded transition flex items-center justify-center"
+                className="w-full bg-orange-600 hover:bg-orange-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold py-4 px-4 rounded-lg transition flex items-center justify-center shadow-lg text-lg"
               >
                 {submitting ? (
                   <>
@@ -364,10 +367,10 @@ const BookingDetail = () => {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    Processing...
+                    Processing Rental...
                   </>
                 ) : (
-                  'Confirm Booking'
+                  'Proceed to Rent & Payment'
                 )}
               </button>
             </form>

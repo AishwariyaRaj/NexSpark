@@ -8,6 +8,7 @@ import { ToastProvider, useToast } from './context/ToastContext';
 import { useWebSocket } from './context/WebSocketContext';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
+import AdminRoute from './components/AdminRoute';
 import ToastNotification from './components/ToastNotification';
 
 // Chatbot Components
@@ -24,6 +25,10 @@ import BookingDetail from './pages/BookingDetail';
 import BookingDetailsView from './pages/BookingDetailsView';
 import Payment from './pages/Payment';
 import MyBookings from './pages/MyBookings';
+import AdminPanel from './pages/AdminPanel';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import VehicleTracking from './pages/VehicleTracking';
 
 // WebSocket Message Handler Component
 const WebSocketMessageHandler = ({ children }) => {
@@ -148,6 +153,30 @@ function App() {
                       </ProtectedRoute>
                     }
                   />
+
+                  {/* Vehicle Tracking */}
+                  <Route
+                    path="/tracking"
+                    element={
+                      <ProtectedRoute>
+                        <VehicleTracking />
+                      </ProtectedRoute>
+                    }
+                  />
+
+                  {/* Admin Routes */}
+                  <Route
+                    path="/admin"
+                    element={
+                      <AdminRoute>
+                        <AdminPanel />
+                      </AdminRoute>
+                    }
+                  />
+
+                  {/* Public Information Routes */}
+                  <Route path="/about" element={<About />} />
+                  <Route path="/contact" element={<Contact />} />
 
                   {/* Redirect unknown routes */}
                   <Route path="*" element={<Navigate to="/" replace />} />

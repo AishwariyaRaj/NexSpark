@@ -43,4 +43,26 @@ public class AvailabilityService {
         String key = "vehicle:lock:" + vehicleId;
         return Boolean.TRUE.equals(redisTemplate.hasKey(key));
     }
+    
+    public Vehicle addVehicle(Vehicle vehicle) {
+        Vehicle savedVehicle = vehicleRepository.save(vehicle);
+        cacheService.refreshCache();
+        return savedVehicle;
+    }
+    
+    public Vehicle updateVehicle(Long vehicleId, Vehicle vehicle) {
+        Optional<Vehicle> existingVehicle = vehicleRepository.findById(vehicleId);
+        if (existingVehicle.isPresent()) {
+            vehicle.setId(vehicleId);
+            Vehicle updatedVehicle = vehicleRepository.save(vehicle);
+            cacheService.refreshCache();
+            return updatedVehicle;
+        }
+        throw new RuntimeException("Vehicle not found with id: " + vehicleId);
+    }
+    
+    public void deleteVehicle(Long vehicleId) {
+        vehicleRepository.deleteById(vehicleId);
+        cacheService.refreshCache();
+    }
 }

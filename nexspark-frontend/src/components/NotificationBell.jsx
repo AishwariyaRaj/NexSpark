@@ -93,10 +93,10 @@ const NotificationBell = () => {
       {/* Bell Icon */}
       <button
         onClick={toggleDropdown}
-        className="relative p-2 hover:bg-primary-700 rounded-full transition"
+        className="relative p-2 hover:bg-orange-100 rounded-full transition"
       >
         <svg
-          className="w-6 h-6"
+          className="w-6 h-6 text-gray-700"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -111,7 +111,7 @@ const NotificationBell = () => {
 
         {/* Unread Count Badge */}
         {unreadCount > 0 && (
-          <span className="absolute top-0 right-0 bg-danger-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+          <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
             {unreadCount > 9 ? '9+' : unreadCount}
           </span>
         )}
@@ -119,13 +119,13 @@ const NotificationBell = () => {
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-secondary-200 z-50">
-          <div className="p-4 border-b border-secondary-200">
-            <h3 className="text-lg font-bold text-secondary-800">
+        <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-50">
+          <div className="p-4 border-b border-gray-200">
+            <h3 className="text-lg font-bold text-gray-800">
               Notifications
             </h3>
             {unreadCount > 0 && (
-              <p className="text-sm text-secondary-600">
+              <p className="text-sm text-gray-600">
                 {unreadCount} unread notification{unreadCount > 1 ? 's' : ''}
               </p>
             )}
@@ -133,11 +133,11 @@ const NotificationBell = () => {
 
           <div className="max-h-96 overflow-y-auto">
             {loading ? (
-              <div className="p-4 text-center text-secondary-500">
+              <div className="p-4 text-center text-gray-500">
                 Loading...
               </div>
             ) : notifications.length === 0 ? (
-              <div className="p-4 text-center text-secondary-500">
+              <div className="p-4 text-center text-gray-500">
                 No notifications
               </div>
             ) : (

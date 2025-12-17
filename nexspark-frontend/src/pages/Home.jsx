@@ -6,10 +6,10 @@ const Home = () => {
   const { isAuthenticated } = useAuth();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="relative bg-gradient-primary text-white py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-black opacity-40"></div>
+      <div className="relative bg-gradient-to-br from-orange-500 to-orange-700 text-white py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-black opacity-20"></div>
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -18,23 +18,23 @@ const Home = () => {
         ></div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
               Find Your Perfect Ride
             </h1>
-            <p className="text-xl mb-8 text-gray-100">
+            <p className="text-xl mb-8 text-white opacity-90">
               Rent premium vehicles at the best prices. Wide selection of cars for every occasion.
             </p>
             <div className="flex space-x-4">
               <Link
                 to="/search"
-                className="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg"
+                className="bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-700 transition-all shadow-xl hover:shadow-2xl"
               >
                 Browse Vehicles
               </Link>
               {!isAuthenticated && (
                 <Link
                   to="/register"
-                  className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-primary-600 transition-colors"
+                  className="bg-white text-orange-600 border-2 border-white px-8 py-4 rounded-lg font-semibold hover:bg-transparent hover:text-white transition-all shadow-xl"
                 >
                   Sign Up Now
                 </Link>
@@ -45,14 +45,14 @@ const Home = () => {
       </div>
 
       {/* Features Section */}
-      <div className="py-20">
+      <div className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">
             Why Choose NexSpark?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mb-4">
+            <div className="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 border-t-4 border-orange-500">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-700 rounded-full flex items-center justify-center mb-4">
                 <svg
                   className="w-8 h-8 text-white"
                   fill="none"
@@ -73,8 +73,8 @@ const Home = () => {
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mb-4">
+            <div className="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 border-t-4 border-orange-500">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-700 rounded-full flex items-center justify-center mb-4">
                 <svg
                   className="w-8 h-8 text-white"
                   fill="none"
@@ -95,8 +95,8 @@ const Home = () => {
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mb-4">
+            <div className="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 border-t-4 border-orange-500">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-700 rounded-full flex items-center justify-center mb-4">
                 <svg
                   className="w-8 h-8 text-white"
                   fill="none"
@@ -111,7 +111,7 @@ const Home = () => {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-800">24/7 Support</h3>
+              <h3 className="text-xl font-bold mb-3 text-gray-900">24/7 Support</h3>
               <p className="text-gray-600">
                 Our team is always available to assist you with any questions.
               </p>
@@ -121,15 +121,15 @@ const Home = () => {
       </div>
 
       {/* CTA Section */}
-      <div className="bg-gradient-primary text-white py-16">
+      <div className="bg-gradient-to-br from-orange-500 to-orange-700 text-white py-16">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-6">Ready to Hit the Road?</h2>
-          <p className="text-xl mb-8 text-gray-100">
+          <h2 className="text-4xl font-bold mb-6 text-white">Ready to Hit the Road?</h2>
+          <p className="text-xl mb-8 text-white opacity-90">
             Browse our wide selection of vehicles and book your perfect ride today.
           </p>
           <Link
             to="/search"
-            className="inline-block bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg"
+            className="inline-block bg-white text-orange-600 px-8 py-4 rounded-lg font-semibold hover:bg-orange-50 transition-all shadow-xl hover:shadow-2xl"
           >
             Get Started
           </Link>

@@ -87,8 +87,8 @@ const Payment = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
-          <p className="mt-4 text-secondary-600">Loading payment details...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading payment details...</p>
         </div>
       </div>
     );
@@ -101,50 +101,50 @@ const Payment = () => {
   const days = calculateDays(booking.startDate, booking.endDate);
 
   return (
-    <div className="min-h-screen bg-secondary-100 py-8">
+    <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4 max-w-3xl">
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
           {/* Header */}
-          <div className="bg-primary-600 text-white p-6">
+          <div className="bg-orange-600 text-white p-6">
             <h1 className="text-3xl font-bold">Complete Your Payment</h1>
             <p className="mt-2">Booking #{booking.bookingId}</p>
           </div>
 
           {/* Booking Summary */}
-          <div className="p-6 border-b border-secondary-200">
-            <h2 className="text-xl font-bold text-secondary-800 mb-4">
+          <div className="p-6 border-b border-gray-200">
+            <h2 className="text-xl font-bold text-gray-800 mb-4">
               Booking Summary
             </h2>
             <div className="space-y-3">
               <div className="flex justify-between">
-                <span className="text-secondary-600">Vehicle ID:</span>
-                <span className="font-medium text-secondary-800">
+                <span className="text-gray-600">Vehicle ID:</span>
+                <span className="font-medium text-gray-800">
                   {booking.vehicleId}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-secondary-600">Start Date:</span>
-                <span className="font-medium text-secondary-800">
+                <span className="text-gray-600">Start Date:</span>
+                <span className="font-medium text-gray-800">
                   {formatDate(booking.startDate)}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-secondary-600">End Date:</span>
-                <span className="font-medium text-secondary-800">
+                <span className="text-gray-600">End Date:</span>
+                <span className="font-medium text-gray-800">
                   {formatDate(booking.endDate)}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-secondary-600">Duration:</span>
-                <span className="font-medium text-secondary-800">
+                <span className="text-gray-600">Duration:</span>
+                <span className="font-medium text-gray-800">
                   {days} day(s)
                 </span>
               </div>
-              <div className="flex justify-between text-lg pt-3 border-t border-secondary-300">
-                <span className="font-bold text-secondary-800">
+              <div className="flex justify-between text-lg pt-3 border-t border-gray-300">
+                <span className="font-bold text-gray-800">
                   Total Amount:
                 </span>
-                <span className="font-bold text-primary-600 text-2xl">
+                <span className="font-bold text-orange-600 text-2xl">
                   {formatCurrency(booking.totalCost)}
                 </span>
               </div>
@@ -153,7 +153,7 @@ const Payment = () => {
 
           {/* Payment Form */}
           <form onSubmit={handlePayment} className="p-6">
-            <h2 className="text-xl font-bold text-secondary-800 mb-4">
+            <h2 className="text-xl font-bold text-gray-800 mb-4">
               Payment Method
             </h2>
 
@@ -161,7 +161,7 @@ const Payment = () => {
               {paymentMethods.map((method) => (
                 <label
                   key={method.value}
-                  className="flex items-center p-4 border border-secondary-300 rounded cursor-pointer hover:bg-secondary-50 transition"
+                  className="flex items-center p-4 border border-gray-300 rounded cursor-pointer hover:bg-orange-50 transition"
                 >
                   <input
                     type="radio"
@@ -171,15 +171,15 @@ const Payment = () => {
                     onChange={(e) => setPaymentMethod(e.target.value)}
                     className="mr-3"
                   />
-                  <span className="text-secondary-800 font-medium">
+                  <span className="text-gray-800 font-medium">
                     {method.label}
                   </span>
                 </label>
               ))}
             </div>
 
-            <div className="bg-warning-50 border border-warning-200 rounded p-4 mb-6">
-              <p className="text-warning-800 text-sm">
+            <div className="bg-orange-50 border border-orange-200 rounded p-4 mb-6">
+              <p className="text-orange-800 text-sm">
                 <strong>Note:</strong> This is an MVP implementation. Payment
                 will be automatically processed successfully.
               </p>
@@ -189,14 +189,14 @@ const Payment = () => {
               <button
                 type="button"
                 onClick={() => navigate('/my-bookings')}
-                className="flex-1 bg-secondary-200 hover:bg-secondary-300 text-secondary-700 font-medium py-3 px-4 rounded transition"
+                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-3 px-4 rounded transition"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={processing}
-                className="flex-1 bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded transition disabled:bg-secondary-400 disabled:cursor-not-allowed"
+                className="flex-1 bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 px-4 rounded transition disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
                 {processing ? 'Processing...' : `Pay ${formatCurrency(booking.totalCost)}`}
               </button>

@@ -21,9 +21,9 @@ const VehicleCard = ({ vehicle }) => {
   const statusColor = 'bg-success-100 text-success-800';
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+    <div className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl hover:scale-105 transition-all duration-300">
       {/* Vehicle Image */}
-      <div className="h-48 bg-gray-200 relative overflow-hidden">
+      <div className="h-48 bg-gray-100 relative overflow-hidden">
         {vehicleImage ? (
           <img
             src={vehicleImage}
@@ -36,7 +36,7 @@ const VehicleCard = ({ vehicle }) => {
           />
         ) : null}
         <div 
-          className="absolute inset-0 bg-gradient-to-br from-purple-400 to-blue-500 flex items-center justify-center"
+          className="absolute inset-0 bg-gradient-to-br from-orange-500 to-orange-700 flex items-center justify-center"
           style={{ display: vehicleImage ? 'none' : 'flex' }}
         >
           <svg
@@ -47,7 +47,7 @@ const VehicleCard = ({ vehicle }) => {
             <path d="M18.92 5.01C18.72 4.42 18.16 4 17.5 4h-11c-.66 0-1.21.42-1.42 1.01L3 11v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 15c-.83 0-1.5-.67-1.5-1.5S5.67 12 6.5 12s1.5.67 1.5 1.5S7.33 15 6.5 15zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 10l1.5-4.5h11L19 10H5z"/>
           </svg>
         </div>
-        <div className="absolute top-2 right-2 bg-primary-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+        <div className="absolute top-2 right-2 bg-orange-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
           {vehicle.type}
         </div>
       </div>
@@ -55,7 +55,7 @@ const VehicleCard = ({ vehicle }) => {
       {/* Vehicle Details */}
       <div className="p-5">
         <div className="flex justify-between items-start mb-3">
-          <h3 className="text-xl font-bold text-gray-800">
+          <h3 className="text-xl font-bold text-gray-900">
             {vehicle.make} {vehicle.model}
           </h3>
           <span className={`px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800`}>
@@ -66,7 +66,7 @@ const VehicleCard = ({ vehicle }) => {
         <div className="space-y-2 text-gray-600 mb-4">
           <div className="flex items-center">
             <svg
-              className="w-4 h-4 mr-2 text-primary-600"
+              className="w-4 h-4 mr-2 text-orange-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -107,7 +107,7 @@ const VehicleCard = ({ vehicle }) => {
 
         <div className="flex justify-between items-center pt-4 border-t border-gray-200">
           <div>
-            <div className="text-2xl font-bold text-primary-600">
+            <div className="text-2xl font-bold text-orange-600">
               {formatCurrency(vehicle.dailyRate)}
             </div>
             <div className="text-xs text-gray-500">per day</div>

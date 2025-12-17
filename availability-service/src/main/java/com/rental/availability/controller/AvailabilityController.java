@@ -39,4 +39,22 @@ public class AvailabilityController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+    
+    @PostMapping("/vehicles")
+    public ResponseEntity<Vehicle> addVehicle(@RequestBody Vehicle vehicle) {
+        Vehicle savedVehicle = availabilityService.addVehicle(vehicle);
+        return ResponseEntity.ok(savedVehicle);
+    }
+    
+    @PutMapping("/vehicles/{vehicleId}")
+    public ResponseEntity<Vehicle> updateVehicle(@PathVariable Long vehicleId, @RequestBody Vehicle vehicle) {
+        Vehicle updatedVehicle = availabilityService.updateVehicle(vehicleId, vehicle);
+        return ResponseEntity.ok(updatedVehicle);
+    }
+    
+    @DeleteMapping("/vehicles/{vehicleId}")
+    public ResponseEntity<Void> deleteVehicle(@PathVariable Long vehicleId) {
+        availabilityService.deleteVehicle(vehicleId);
+        return ResponseEntity.ok().build();
+    }
 }

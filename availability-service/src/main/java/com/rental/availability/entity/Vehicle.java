@@ -35,4 +35,16 @@ public class Vehicle {
     
     @Column(nullable = false)
     private String type;
+    
+    private String licensePlate;
+    
+    private String color;
+    
+    private String fuelType;
+    
+    private String transmission;
+    
+    private Integer seats;
+    
+    private String imageUrl;
 }

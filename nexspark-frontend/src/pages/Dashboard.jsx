@@ -74,35 +74,35 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
-          <p className="mt-4 text-secondary-600">Loading dashboard...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading dashboard...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-secondary-100 py-8">
+    <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4">
         {/* Welcome Section */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+        <div className="bg-white rounded-lg shadow-xl p-6 mb-8">
           <h1 className="text-3xl font-bold text-gray-900">
             Welcome back, {user?.firstName || user?.email}!
           </h1>
-          <p className="text-secondary-600 mt-2">
+          <p className="text-gray-600 mt-2">
             Here's an overview of your rental activity.
           </p>
         </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="bg-white rounded-lg shadow-xl p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-secondary-600 text-sm">Total Bookings</p>
-                <p className="text-3xl font-bold text-secondary-800">
+                <p className="text-gray-600 text-sm">Total Bookings</p>
+                <p className="text-3xl font-bold text-gray-900">
                   {stats.total}
                 </p>
               </div>
@@ -153,14 +153,14 @@ const Dashboard = () => {
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-secondary-600 text-sm">Completed</p>
-                <p className="text-3xl font-bold text-secondary-800">
+                <p className="text-gray-600 text-sm">Completed</p>
+                <p className="text-3xl font-bold text-orange-600">
                   {stats.completed}
                 </p>
               </div>
-              <div className="bg-secondary-100 p-3 rounded-full">
+              <div className="bg-orange-100 p-3 rounded-full">
                 <svg
-                  className="w-8 h-8 text-secondary-600"
+                  className="w-8 h-8 text-orange-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -178,12 +178,12 @@ const Dashboard = () => {
         </div>
 
         {/* Recent Bookings */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-bold text-secondary-800 mb-4">
+        <div className="bg-white rounded-lg shadow-xl p-6 mb-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
             Recent Bookings
           </h2>
           {bookings.length === 0 ? (
-            <p className="text-secondary-600 text-center py-8">
+            <p className="text-gray-600 text-center py-8">
               No bookings yet. Start by searching for vehicles!
             </p>
           ) : (
@@ -200,12 +200,12 @@ const Dashboard = () => {
         </div>
 
         {/* Recent Notifications */}
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-bold text-secondary-800 mb-4">
+        <div className="bg-white rounded-lg shadow-xl p-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
             Recent Notifications
           </h2>
           {notifications.length === 0 ? (
-            <p className="text-secondary-600 text-center py-8">
+            <p className="text-gray-600 text-center py-8">
               No notifications yet.
             </p>
           ) : (
@@ -213,10 +213,10 @@ const Dashboard = () => {
               {notifications.map((notification) => (
                 <div
                   key={notification.notificationId}
-                  className="p-4 border border-secondary-200 rounded hover:bg-secondary-50 transition"
+                  className="p-4 border border-gray-200 rounded hover:bg-gray-50 transition"
                 >
-                  <p className="text-secondary-800">{notification.message}</p>
-                  <p className="text-xs text-secondary-500 mt-1">
+                  <p className="text-gray-800">{notification.message}</p>
+                  <p className="text-xs text-gray-500 mt-1">
                     {new Date(notification.createdAt).toLocaleString()}
                   </p>
                 </div>

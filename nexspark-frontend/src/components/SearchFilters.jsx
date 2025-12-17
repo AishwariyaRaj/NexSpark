@@ -5,6 +5,7 @@ const SearchFilters = ({ onSearch }) => {
     startDate: '',
     endDate: '',
     location: '',
+    vehicleType: '',
   });
 
   const locations = [
@@ -18,6 +19,16 @@ const SearchFilters = ({ onSearch }) => {
     'San Diego',
     'Dallas',
     'San Jose',
+  ];
+
+  const vehicleTypes = [
+    'Sedan',
+    'SUV',
+    'Hatchback',
+    'Luxury',
+    'Sports',
+    'Van',
+    'Truck',
   ];
 
   const handleChange = (e) => {
@@ -53,17 +64,18 @@ const SearchFilters = ({ onSearch }) => {
       startDate: '',
       endDate: '',
       location: '',
+      vehicleType: '',
     });
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-2xl font-bold text-white mb-6">
+    <div className="bg-white rounded-lg shadow-xl p-6">
+      <h2 className="text-2xl font-bold text-gray-900 mb-6">
         Search Vehicles
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Start Date */}
           <div>
             <label
@@ -79,7 +91,7 @@ const SearchFilters = ({ onSearch }) => {
               value={filters.startDate}
               onChange={handleChange}
               min={new Date().toISOString().split('T')[0]}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              className="w-full px-4 py-3 bg-white border border-gray-300 text-gray-900 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
               required
             />
           </div>
@@ -99,7 +111,7 @@ const SearchFilters = ({ onSearch }) => {
               value={filters.endDate}
               onChange={handleChange}
               min={filters.startDate || new Date().toISOString().split('T')[0]}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              className="w-full px-4 py-3 bg-white border border-gray-300 text-gray-900 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
               required
             />
           </div>
@@ -117,12 +129,36 @@ const SearchFilters = ({ onSearch }) => {
               name="location"
               value={filters.location}
               onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              className="w-full px-4 py-3 bg-white border border-gray-300 text-gray-900 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
             >
               <option value="">All Locations</option>
               {locations.map((location) => (
                 <option key={location} value={location}>
                   {location}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Vehicle Type */}
+          <div>
+            <label
+              htmlFor="vehicleType"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Vehicle Type (Optional)
+            </label>
+            <select
+              id="vehicleType"
+              name="vehicleType"
+              value={filters.vehicleType}
+              onChange={handleChange}
+              className="w-full px-4 py-3 bg-white border border-gray-300 text-gray-900 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+            >
+              <option value="">All Types</option>
+              {vehicleTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
                 </option>
               ))}
             </select>
@@ -133,14 +169,14 @@ const SearchFilters = ({ onSearch }) => {
         <div className="flex space-x-4">
           <button
             type="submit"
-            className="flex-1 bg-accent hover:bg-accent-dark text-white font-semibold py-3 px-6 rounded-lg transition"
+            className="flex-1 bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-6 rounded-lg transition shadow-lg"
           >
             Search Vehicles
           </button>
           <button
             type="button"
             onClick={handleReset}
-            className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-lg transition"
+            className="bg-white hover:bg-gray-50 border-2 border-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-lg transition"
           >
             Reset
           </button>

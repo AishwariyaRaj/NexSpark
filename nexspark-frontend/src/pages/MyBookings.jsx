@@ -56,24 +56,24 @@ const MyBookings = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
-          <p className="mt-4 text-secondary-600">Loading bookings...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading bookings...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-secondary-100 py-8">
+    <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-secondary-800">
+          <h1 className="text-3xl font-bold text-gray-800">
             My Bookings
           </h1>
           <button
             onClick={() => navigate('/search')}
-            className="bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded transition"
+            className="bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded transition"
           >
             Book New Vehicle
           </button>
@@ -88,8 +88,8 @@ const MyBookings = () => {
                 onClick={() => setFilter(f.value)}
                 className={`px-4 py-2 rounded font-medium transition ${
                   filter === f.value
-                    ? 'bg-primary-600 text-white'
-                    : 'bg-secondary-100 text-secondary-700 hover:bg-secondary-200'
+                    ? 'bg-orange-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
                 {f.label}

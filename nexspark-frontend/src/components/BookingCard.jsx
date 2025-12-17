@@ -24,13 +24,13 @@ const BookingCard = ({ booking, onCancel }) => {
   const days = calculateDays(booking.startDate, booking.endDate);
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+    <div className="bg-white rounded-lg shadow-xl p-6 hover:shadow-2xl transition">
       <div className="flex justify-between items-start mb-4">
         <div>
-          <h3 className="text-xl font-bold text-secondary-800">
+          <h3 className="text-xl font-bold text-gray-900">
             Booking #{booking.bookingId}
           </h3>
-          <p className="text-sm text-secondary-500">
+          <p className="text-sm text-gray-500">
             Vehicle ID: {booking.vehicleId}
           </p>
         </div>
@@ -46,24 +46,24 @@ const BookingCard = ({ booking, onCancel }) => {
       {/* Booking Details */}
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
-          <div className="text-sm text-secondary-600">Start Date</div>
-          <div className="font-medium text-secondary-800">
+          <div className="text-sm text-gray-600">Start Date</div>
+          <div className="font-medium text-gray-900">
             {formatDate(booking.startDate)}
           </div>
         </div>
         <div>
-          <div className="text-sm text-secondary-600">End Date</div>
-          <div className="font-medium text-secondary-800">
+          <div className="text-sm text-gray-600">End Date</div>
+          <div className="font-medium text-gray-900">
             {formatDate(booking.endDate)}
           </div>
         </div>
         <div>
-          <div className="text-sm text-secondary-600">Duration</div>
-          <div className="font-medium text-secondary-800">{days} days</div>
+          <div className="text-sm text-gray-600">Duration</div>
+          <div className="font-medium text-gray-900">{days} days</div>
         </div>
         <div>
-          <div className="text-sm text-secondary-600">Total Cost</div>
-          <div className="font-medium text-primary-600 text-lg">
+          <div className="text-sm text-gray-600">Total Cost</div>
+          <div className="font-medium text-orange-600 text-lg">
             {formatCurrency(booking.totalCost)}
           </div>
         </div>
@@ -73,14 +73,14 @@ const BookingCard = ({ booking, onCancel }) => {
       <div className="flex space-x-3">
         <button
           onClick={handleViewDetails}
-          className="flex-1 bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded transition"
+          className="flex-1 bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded transition"
         >
           View Details
         </button>
         {booking.status === 'PENDING' && (
           <button
             onClick={handleCancel}
-            className="bg-danger-500 hover:bg-danger-600 text-white font-medium py-2 px-4 rounded transition"
+            className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded transition"
           >
             Cancel
           </button>

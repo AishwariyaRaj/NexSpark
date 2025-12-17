@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }) => {
       email: response.email,
       firstName: response.firstName,
       lastName: response.lastName,
+      role: response.role || (email === 'admin@nexspark.com' ? 'ADMIN' : 'USER'), // Add role support
     });
     setIsAuthenticated(true);
     return response;
