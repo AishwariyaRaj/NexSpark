@@ -303,7 +303,8 @@ const BookingDetail = () => {
                     value={bookingData.startDate}
                     onChange={handleChange}
                     min={new Date().toISOString().split('T')[0]}
-                    className="w-full px-4 py-2 border border-secondary-300 rounded focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-secondary-300 rounded focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-900 font-medium"
+                    style={{ colorScheme: 'light' }}
                     required
                   />
                 </div>
@@ -325,7 +326,8 @@ const BookingDetail = () => {
                       bookingData.startDate ||
                       new Date().toISOString().split('T')[0]
                     }
-                    className="w-full px-4 py-2 border border-secondary-300 rounded focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-secondary-300 rounded focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-900 font-medium"
+                    style={{ colorScheme: 'light' }}
                     required
                   />
                 </div>

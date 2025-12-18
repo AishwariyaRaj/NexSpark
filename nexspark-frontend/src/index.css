@@ -87,3 +87,29 @@ code {
 .animate-slide-in {
   animation: slideInRight 0.3s ease-out;
 }
+
+/* Fix for date input visibility */
+input[type="date"] {
+  background-color: #ffffff;
+  color: #1f2937;
+  font-weight: 500;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0);
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+input[type="date"]::-webkit-datetime-edit-text,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+  color: #1f2937;
+  font-weight: 500;
+}
+
+input[type="date"]:focus {
+  outline: 2px solid #ff5722;
+  outline-offset: 2px;
+}

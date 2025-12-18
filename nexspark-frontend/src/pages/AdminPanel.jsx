@@ -187,8 +187,6 @@ const AdminPanel = () => {
                     <option value="SUV">SUV</option>
                     <option value="Hatchback">Hatchback</option>
                     <option value="Luxury">Luxury</option>
-                    <option value="Sports">Sports</option>
-                    <option value="Van">Van</option>
                     <option value="Truck">Truck</option>
                   </select>
                 </div>

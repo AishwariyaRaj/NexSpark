@@ -17,8 +17,6 @@ const Search = () => {
     { value: 'SUV', label: 'SUVs', icon: '🚙' },
     { value: 'Hatchback', label: 'Hatchbacks', icon: '🚗' },
     { value: 'Luxury', label: 'Luxury', icon: '🏎️' },
-    { value: 'Sports', label: 'Sports', icon: '🏁' },
-    { value: 'Van', label: 'Vans', icon: '🚐' },
     { value: 'Truck', label: 'Trucks', icon: '🚚' },
   ];
 

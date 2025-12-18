@@ -26,8 +26,6 @@ const SearchFilters = ({ onSearch }) => {
     'SUV',
     'Hatchback',
     'Luxury',
-    'Sports',
-    'Van',
     'Truck',
   ];
 
