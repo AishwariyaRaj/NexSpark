@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 @Configuration
 public class DatabaseConfig {
@@ -13,42 +15,62 @@ public class DatabaseConfig {
     @Bean
     @Primary
     public DataSource dataSource() {
+        // Check for DATABASE_URL (Render format: postgres://user:pass@host:port/dbname)
         String databaseUrl = System.getenv("DATABASE_URL");
         
-        if (databaseUrl != null && databaseUrl.startsWith("postgres://")) {
-            // Convert Render's DATABASE_URL format to JDBC format
-            databaseUrl = databaseUrl.replace("postgres://", "jdbc:postgresql://");
-            
-            // Parse URL to extract user, password, host, port, and database
+        if (databaseUrl != null && !databaseUrl.isEmpty()) {
+            System.out.println("Using DATABASE_URL for connection");
             try {
-                java.net.URI dbUri = new java.net.URI(databaseUrl.replace("jdbc:postgresql://", "http://"));
-                String username = dbUri.getUserInfo().split(":")[0];
-                String password = dbUri.getUserInfo().split(":")[1];
-                String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+                URI dbUri = new URI(databaseUrl);
+                
+                String username = null;
+                String password = null;
+                
+                if (dbUri.getUserInfo() != null) {
+                    String[] userInfo = dbUri.getUserInfo().split(":");
+                    username = userInfo[0];
+                    password = userInfo.length > 1 ? userInfo[1] : "";
+                }
+                
+                String host = dbUri.getHost();
+                int port = dbUri.getPort();
+                String path = dbUri.getPath();
+                
+                // Build JDBC URL
+                String jdbcUrl = String.format("jdbc:postgresql://%s:%d%s", host, port, path);
+                
+                System.out.println("Connecting to: " + jdbcUrl.replaceAll(":[^:]+@", ":****@"));
                 
                 return DataSourceBuilder.create()
-                        .url(dbUrl)
+                        .url(jdbcUrl)
                         .username(username)
                         .password(password)
                         .driverClassName("org.postgresql.Driver")
                         .build();
-            } catch (Exception e) {
-                throw new RuntimeException("Failed to parse DATABASE_URL", e);
+                        
+            } catch (URISyntaxException e) {
+                System.err.println("Failed to parse DATABASE_URL: " + e.getMessage());
+                throw new RuntimeException("Invalid DATABASE_URL format", e);
             }
         }
         
-        // Fallback to default Spring Boot configuration
+        // Fallback to Spring Boot properties
         String jdbcUrl = System.getenv("SPRING_DATASOURCE_URL");
+        String username = System.getenv("SPRING_DATASOURCE_USERNAME");
+        String password = System.getenv("SPRING_DATASOURCE_PASSWORD");
+        
         if (jdbcUrl == null) {
             jdbcUrl = "jdbc:postgresql://localhost:5432/auth_db";
+            username = "postgres";
+            password = "postgres";
         }
+        
+        System.out.println("Using fallback connection to: " + jdbcUrl);
         
         return DataSourceBuilder.create()
                 .url(jdbcUrl)
-                .username(System.getenv("SPRING_DATASOURCE_USERNAME") != null ? 
-                    System.getenv("SPRING_DATASOURCE_USERNAME") : "postgres")
-                .password(System.getenv("SPRING_DATASOURCE_PASSWORD") != null ? 
-                    System.getenv("SPRING_DATASOURCE_PASSWORD") : "postgres")
+                .username(username != null ? username : "postgres")
+                .password(password != null ? password : "postgres")
                 .driverClassName("org.postgresql.Driver")
                 .build();
     }
