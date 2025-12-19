@@ -9,8 +9,6 @@ services:
   - type: pserv
     name: nexspark-postgres
     plan: free
-    databaseName: nexspark_db
-    databaseUser: nexspark
     
   - type: redis
     name: nexspark-redis
