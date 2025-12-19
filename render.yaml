@@ -1,20 +1,7 @@
 # Render Blueprint - Infrastructure as Code for NexSpark
-# Deploy all services with: render blueprint apply
+# Note: Create PostgreSQL and Redis manually first, then deploy this blueprint
 
 services:
-  # ============================================
-  # DATABASES & INFRASTRUCTURE
-  # ============================================
-  
-  - type: pserv
-    name: nexspark-postgres
-    plan: free
-    
-  - type: redis
-    name: nexspark-redis
-    plan: free
-    ipAllowList: []
-  
   # ============================================
   # MICROSERVICES
   # ============================================
@@ -34,17 +21,11 @@ services:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
       - key: SPRING_DATASOURCE_URL
-        fromDatabase:
-          name: nexspark-postgres
-          property: connectionString
+        sync: false
       - key: SPRING_DATASOURCE_USERNAME
-        fromDatabase:
-          name: nexspark-postgres
-          property: user
+        sync: false
       - key: SPRING_DATASOURCE_PASSWORD
-        fromDatabase:
-          name: nexspark-postgres
-          property: password
+        sync: false
       - key: JWT_SECRET
         generateValue: true
       - key: BOOKING_SERVICE_URL
@@ -78,27 +59,15 @@ services:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
       - key: SPRING_DATASOURCE_URL
-        fromDatabase:
-          name: nexspark-postgres
-          property: connectionString
+        sync: false
       - key: SPRING_DATASOURCE_USERNAME
-        fromDatabase:
-          name: nexspark-postgres
-          property: user
+        sync: false
       - key: SPRING_DATASOURCE_PASSWORD
-        fromDatabase:
-          name: nexspark-postgres
-          property: password
+        sync: false
       - key: SPRING_REDIS_HOST
-        fromService:
-          type: redis
-          name: nexspark-redis
-          property: host
+        sync: false
       - key: SPRING_REDIS_PORT
-        fromService:
-          type: redis
-          name: nexspark-redis
-          property: port
+        sync: false
   
   # Availability Service
   - type: web
@@ -115,27 +84,15 @@ services:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
       - key: SPRING_DATASOURCE_URL
-        fromDatabase:
-          name: nexspark-postgres
-          property: connectionString
+        sync: false
       - key: SPRING_DATASOURCE_USERNAME
-        fromDatabase:
-          name: nexspark-postgres
-          property: user
+        sync: false
       - key: SPRING_DATASOURCE_PASSWORD
-        fromDatabase:
-          name: nexspark-postgres
-          property: password
+        sync: false
       - key: SPRING_REDIS_HOST
-        fromService:
-          type: redis
-          name: nexspark-redis
-          property: host
+        sync: false
       - key: SPRING_REDIS_PORT
-        fromService:
-          type: redis
-          name: nexspark-redis
-          property: port
+        sync: false
   
   # Payment Service
   - type: web
@@ -152,17 +109,11 @@ services:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
       - key: SPRING_DATASOURCE_URL
-        fromDatabase:
-          name: nexspark-postgres
-          property: connectionString
+        sync: false
       - key: SPRING_DATASOURCE_USERNAME
-        fromDatabase:
-          name: nexspark-postgres
-          property: user
+        sync: false
       - key: SPRING_DATASOURCE_PASSWORD
-        fromDatabase:
-          name: nexspark-postgres
-          property: password
+        sync: false
   
   # Notification Service
   - type: web
@@ -179,17 +130,11 @@ services:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
       - key: SPRING_DATASOURCE_URL
-        fromDatabase:
-          name: nexspark-postgres
-          property: connectionString
+        sync: false
       - key: SPRING_DATASOURCE_USERNAME
-        fromDatabase:
-          name: nexspark-postgres
-          property: user
+        sync: false
       - key: SPRING_DATASOURCE_PASSWORD
-        fromDatabase:
-          name: nexspark-postgres
-          property: password
+        sync: false
   
   # WebSocket Service
   - type: web
