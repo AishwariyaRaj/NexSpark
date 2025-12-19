@@ -8,14 +8,9 @@ services:
   
   - type: pserv
     name: nexspark-postgres
-    env: docker
     plan: free
-    databases:
-      - name: auth_db
-      - name: booking_db
-      - name: availability_db
-      - name: payment_db
-      - name: notification_db
+    databaseName: nexspark_db
+    databaseUser: nexspark
     
   - type: redis
     name: nexspark-redis
