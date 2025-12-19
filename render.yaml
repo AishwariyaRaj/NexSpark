@@ -1,0 +1,228 @@
+# Render Blueprint - Infrastructure as Code for NexSpark
+# Deploy all services with: render blueprint apply
+
+services:
+  # ============================================
+  # DATABASES & INFRASTRUCTURE
+  # ============================================
+  
+  - type: pserv
+    name: nexspark-postgres
+    env: docker
+    plan: free
+    databases:
+      - name: auth_db
+      - name: booking_db
+      - name: availability_db
+      - name: payment_db
+      - name: notification_db
+    
+  - type: redis
+    name: nexspark-redis
+    plan: free
+    ipAllowList: []
+  
+  # ============================================
+  # MICROSERVICES
+  # ============================================
+  
+  # API Gateway (Entry point)
+  - type: web
+    name: nexspark-api-gateway
+    env: docker
+    region: oregon
+    plan: free
+    dockerfilePath: ./api-gateway/Dockerfile
+    dockerContext: ./api-gateway
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SERVER_PORT
+        value: 8080
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: nexspark-postgres
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: nexspark-postgres
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: nexspark-postgres
+          property: password
+      - key: JWT_SECRET
+        generateValue: true
+      - key: BOOKING_SERVICE_URL
+        fromService:
+          type: web
+          name: nexspark-booking
+          property: host
+      - key: AVAILABILITY_SERVICE_URL
+        fromService:
+          type: web
+          name: nexspark-availability
+          property: host
+      - key: PAYMENT_SERVICE_URL
+        fromService:
+          type: web
+          name: nexspark-payment
+          property: host
+  
+  # Booking Service
+  - type: web
+    name: nexspark-booking
+    env: docker
+    region: oregon
+    plan: free
+    dockerfilePath: ./booking-service/Dockerfile
+    dockerContext: ./booking-service
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SERVER_PORT
+        value: 8081
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: nexspark-postgres
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: nexspark-postgres
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: nexspark-postgres
+          property: password
+      - key: SPRING_REDIS_HOST
+        fromService:
+          type: redis
+          name: nexspark-redis
+          property: host
+      - key: SPRING_REDIS_PORT
+        fromService:
+          type: redis
+          name: nexspark-redis
+          property: port
+  
+  # Availability Service
+  - type: web
+    name: nexspark-availability
+    env: docker
+    region: oregon
+    plan: free
+    dockerfilePath: ./availability-service/Dockerfile
+    dockerContext: ./availability-service
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SERVER_PORT
+        value: 8082
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: nexspark-postgres
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: nexspark-postgres
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: nexspark-postgres
+          property: password
+      - key: SPRING_REDIS_HOST
+        fromService:
+          type: redis
+          name: nexspark-redis
+          property: host
+      - key: SPRING_REDIS_PORT
+        fromService:
+          type: redis
+          name: nexspark-redis
+          property: port
+  
+  # Payment Service
+  - type: web
+    name: nexspark-payment
+    env: docker
+    region: oregon
+    plan: free
+    dockerfilePath: ./payment-service/Dockerfile
+    dockerContext: ./payment-service
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SERVER_PORT
+        value: 8083
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: nexspark-postgres
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: nexspark-postgres
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: nexspark-postgres
+          property: password
+  
+  # Notification Service
+  - type: web
+    name: nexspark-notification
+    env: docker
+    region: oregon
+    plan: free
+    dockerfilePath: ./notification-service/Dockerfile
+    dockerContext: ./notification-service
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SERVER_PORT
+        value: 8084
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: nexspark-postgres
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: nexspark-postgres
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: nexspark-postgres
+          property: password
+  
+  # WebSocket Service
+  - type: web
+    name: nexspark-websocket
+    env: docker
+    region: oregon
+    plan: free
+    dockerfilePath: ./websocket-service/Dockerfile
+    dockerContext: ./websocket-service
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SERVER_PORT
+        value: 8085
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+  
+  # Chatbot Service
+  - type: web
+    name: nexspark-chatbot
+    env: docker
+    region: oregon
+    plan: free
+    dockerfilePath: ./chatbot-service/Dockerfile
+    dockerContext: ./chatbot-service
+    envVars:
+      - key: PORT
+        value: 8086
+      - key: OPENAI_API_KEY
+        sync: false
